@@ -1,0 +1,12 @@
+bikerenting:
+  outputs:
+    dev:
+      dbname: bikerenting
+      host: ____________
+      password: ____________
+      port: 5439
+      schema: dbt_dbikerenting
+      threads: 1
+      type: redshift
+      user: _________
+  target: dev

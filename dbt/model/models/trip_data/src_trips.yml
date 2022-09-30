@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: trips_data
+    database: bikerenting
+    schema: public
+    tables:
+      - name: trip_stage_table

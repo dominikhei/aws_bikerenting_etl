@@ -1,0 +1,114 @@
+version: 2
+
+models:
+  - name: stations_dim
+    description: dimensional table for the stations in new york .
+    columns: 
+      - name: id
+        description: The primary key for the stations.
+        tests:
+          - unique
+          - not_null
+  - name: date_dim
+    description: dimensional table for the dates.
+    columns: 
+      - name: id
+        description: The primary key for the dates.
+        tests:
+          - unique
+          - not_null
+      - name: year
+        description: The column for the year.
+        tests:
+          - not_null
+      - name: month
+        description: The column for the month.
+        tests:
+          - not_null
+      - name: day
+        description: The column for the day.
+        tests:
+          - not_null
+  - name: time_dim
+    description: dimensional table for the times.
+    columns: 
+      - name: id
+        description: The primary key for the dates.
+        tests:
+          - unique
+          - not_null
+      - name: hour
+        description: The column for the hours.
+        tests:
+          - not_null
+      - name: minute
+        description: The column for the minutes.
+        tests:
+          - not_null
+  - name: user_dim
+    description: dimensional table for the user groups.
+    columns: 
+      - name: id
+        description: The primary key for the user groups.
+        tests:
+          - unique
+          - not_null
+      - name: gender
+        description: The column for the gender.
+        tests:
+          - not_null
+          - accepted_values:
+              values:
+                - 0
+                - 1
+                - 2
+      - name: usertype
+        description: The column for the type of user.
+        tests:
+          - not_null
+          - accepted_values:
+              values:
+                - Subscriber
+                - Customer
+  - name: trips_fact
+    description: fact table.
+    columns: 
+      - name: id
+        description: The primary key for the fact table.
+        tests:
+          - unique
+          - not_null
+      - name: user_group_id
+        description: The foreign key for the user_group dimension.
+        tests:
+          - not_null
+      - name: starttimeid
+        description: The foreign key for the time dimension.
+        tests:
+          - not_null         
+      - name: stoptimeid
+        description: The foreign key for the stop_time dimension.
+        tests:
+          - not_null
+      - name: startdate
+        description: The foreign key for the start_date dimension.
+        tests:
+          - not_null
+      - name: stopdate
+        description: The foreign key for the stop_date dimension.
+        tests:
+          - not_null
+      - name: loaded_at
+        description: The loading date.
+        tests:
+          - not_null
+      - name: startstationid
+        description: The foreign key for the start station dimension.
+        tests:
+          - not_null
+      - name: duration
+        description: The foreign key for the duration column.
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: " >= 0"
