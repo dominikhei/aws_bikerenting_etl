@@ -8,8 +8,41 @@ Hierfür habe ich einen Batch-Job entwickelt, welcher den CSV in ein richtiges F
 
 ## Verwendete Technologien
 
-
-
+- Python 
+- Aws (S3, Redshift) 
+- Docker 
+- Airflow 
+- Dbt 
+- Tableau 
 
 ## Architektur
 ![a](https://github.com/SurlaRoute14/bikerenting-etl/blob/main/bilder/ARCHITEKTUR-2.png)
+
+
+## Ablauf: 
+
+Sämtliche Schritte die typischerweise lokal ablaufen habe ich mithilfe von Docker containerisiert. Dies betrifft das Transformieren der Csv Datei und Laden dieser in Redshift, sowie die Datenmodellierung und das testen in DBT. 
+
+1. Laden & Transformieren der CSV Datei und Laden in S3
+
+Mithilfe eines Containerisierten Python Skriptes Transformiere ich die CSV Datei, um fehlende Werte zu behandeln und falsche Datumswerte                                   zu berichtigen. Die CSV Datei  wird dann in einen S3 Bucket mit dem Namen „bikerenting“ geladen. 
+
+2. Laden von S3 zu Redshift 
+
+Nachdem eine Verbindung zu Redshift hergestellt wurde, wird ein Stage Table erstellt, falls dieser noch nicht existiert. Im nächsten Schritt wird die CSV Datei aus S3 in den Redshift Stage Table kopiert. 
+
+3. Datenmodellierung mit DBT 
+
+
+4. Orkestrierung mit Apache Airflow 
+
+Airflow muss über Docker-Compose ausgeführt werden, eine Anleitung findet sich hier: 
+
+Schritt 1,2 und 3 werden alle über Airflow ausgeführt. Hierfür verwende ich den Docker Operator um die Docker Images und damit das Skript auszuführen.  Der DAG hierfür lässt sich in dem dag Ordner finden. 
+
+5. Visualisierung mit Tableau 
+
+Tableau greift auf Redshift zu und ich habe ein simples Dashboard erstellt, welches die Attraktivität von Leihstationen visualisiert. 
+
+![](https://github.com/SurlaRoute14/bikerenting-etl/blob/main/bilder/dashboard.png)
+
