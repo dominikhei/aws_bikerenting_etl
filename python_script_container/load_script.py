@@ -208,7 +208,7 @@ def load_data_in_redshift():
     try:
         cursor.execute("TRUNCATE TABLE public.trip_stage_table;")
         print("Truncated the temp table")
-        cursor.execute("copy public.trip_stage_table from 's3://bikerenting/bikerenting_2015' iam_role 'arn:aws:iam::903466892742:role/bikesharing_project_redshift' IGNOREHEADER 1 csv;")
+        cursor.execute("copy public.trip_stage_table from {bukket_name_file_name} iam_role '{aws_iam_role_link}' IGNOREHEADER 1 csv;")
         print("Inserted data into the stage table")
     except Exception as e:
         print(f"Could not insert into the table, due to error {e}")
