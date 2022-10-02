@@ -44,6 +44,10 @@ Der finale Datamart sieht so aus:
 Die Stations Dimensions-Tabelle inkludiert dabei slowly changing dimensions, da manche Stationen in der Zukunft vielleicht nicht mehr verwendet werden. 
 Auch habe ich eine extra Tabelle für das Datum und die Zeit implementiert, genau so wie Kimball dies empfiehlt. 
 
+<ins>Tests:</ins>
+
+Neben verschiedenen Not Null sowie Unique Value Tests und dem Zulassen von nur bestimmten Werten, wird vor dem Ausführen der Sql-Statements auch getestet, ob keine Einträge verloren gehen. 
+
 **4.** *Orchestrierung mit Apache Airflow*
 
 Airflow muss über Docker-Compose ausgeführt werden, eine Anleitung findet sich [hier](https://airflow.apache.org/docs/apache-airflow/stable/howto/docker-compose/index.html) 
