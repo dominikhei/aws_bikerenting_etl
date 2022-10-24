@@ -238,7 +238,7 @@ def truncate_dbt_stage():
     except Exception as e:
         print(f"Could not truncate the table, due to error {e}")
 
-main():
+def main():
     upload()
     load_data_in_redshift()
     truncate_dbt_stage()
