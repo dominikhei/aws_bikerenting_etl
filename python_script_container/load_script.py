@@ -243,5 +243,5 @@ main():
     load_data_in_redshift()
     truncate_dbt_stage()
 
-if _name__ == "__main__":
+if __name__ == "__main__":
     main()
