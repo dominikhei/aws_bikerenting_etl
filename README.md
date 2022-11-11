@@ -48,6 +48,8 @@ Auch habe ich eine extra Tabelle für das Datum und die Zeit implementiert, gena
 
 Neben verschiedenen Not Null sowie Unique Value Tests und dem Zulassen von nur bestimmten Werten, wird vor dem Ausführen der Sql-Statements auch getestet, ob keine Einträge verloren gehen. 
 
+Die Skripte zum Erstellen der Tabellen und yaml-Dateien zum definieren der Tests, lassen sich [hier](https://github.com/dominikhei/aws_bikerenting_etl/tree/main/dbt/model/models/trip_data) finden
+
 **4.** *Orchestrierung mit Apache Airflow*
 
 Airflow muss über Docker-Compose ausgeführt werden, eine Anleitung findet sich [hier](https://airflow.apache.org/docs/apache-airflow/stable/howto/docker-compose/index.html) 
